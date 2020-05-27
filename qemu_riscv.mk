@@ -107,7 +107,7 @@ arm-tf-clean:
 # QEMU
 ################################################################################
 qemu:
-	cd $(QEMU_PATH); ./configure --target-list=aarch64-softmmu\
+	cd $(QEMU_PATH); ./configure --target-list=riscv64-softmmu\
 			$(QEMU_CONFIGURE_PARAMS_COMMON)
 	$(MAKE) -C $(QEMU_PATH)
 
