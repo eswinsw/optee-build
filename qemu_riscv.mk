@@ -8,6 +8,9 @@ override COMPILE_NS_KERNEL := 64
 override COMPILE_S_USER    := 64
 override COMPILE_S_KERNEL  := 64
 
+CROSS_COMPILE_NS_USER = /opt/riscv64/bin/riscv64-unknown-linux-gnu-
+CROSS_COMPILE_NS_KERNEL = /opt/riscv64/bin/riscv64-unknown-linux-gnu-
+
 ################################################################################
 # If you change this, you MUST run `make arm-tf-clean` first before rebuilding
 ################################################################################
@@ -135,26 +138,26 @@ edk2-clean: edk2-clean-common
 ################################################################################
 # Linux kernel
 ################################################################################
-LINUX_DEFCONFIG_COMMON_ARCH := arm64
+LINUX_DEFCONFIG_COMMON_ARCH := riscv
 LINUX_DEFCONFIG_COMMON_FILES := \
-		$(LINUX_PATH)/arch/arm64/configs/defconfig \
+		$(LINUX_PATH)/arch/riscv/configs/defconfig \
 		$(CURDIR)/kconfigs/qemu.conf
 
 linux-defconfig: $(LINUX_PATH)/.config
 
-LINUX_COMMON_FLAGS += ARCH=arm64 Image
+LINUX_COMMON_FLAGS += ARCH=riscv Image
 
 linux: linux-common
 	mkdir -p $(BINARIES_PATH)
-	ln -sf $(LINUX_PATH)/arch/arm64/boot/Image $(BINARIES_PATH)
+	ln -sf $(LINUX_PATH)/arch/riscv/boot/Image $(BINARIES_PATH)
 
 linux-defconfig-clean: linux-defconfig-clean-common
 
-LINUX_CLEAN_COMMON_FLAGS += ARCH=arm64
+LINUX_CLEAN_COMMON_FLAGS += ARCH=riscv
 
 linux-clean: linux-clean-common
 
-LINUX_CLEANER_COMMON_FLAGS += ARCH=arm64
+LINUX_CLEANER_COMMON_FLAGS += ARCH=riscv
 
 linux-cleaner: linux-cleaner-common
 
